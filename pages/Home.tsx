@@ -4,7 +4,7 @@ const Home = ({ nome }) => {
   const navigate = useNavigate();
 
   const criarSala = async () => {
-    const res = await fetch('http://localhost:3001/criar-sala', {
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/criar-sala`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nome }),
@@ -16,7 +16,7 @@ const Home = ({ nome }) => {
   const entrarSala = async (e) => {
     e.preventDefault();
     const codigo = e.target.codigo.value.trim();
-    const res = await fetch('http://localhost:3001/entrar-sala', {
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/entrar-sala`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nome, codigo }),
@@ -28,10 +28,24 @@ const Home = ({ nome }) => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen space-y-4">
-      <button onClick={criarSala} className="bg-green-500 text-white px-4 py-2 rounded">Criar Sala</button>
+      <button
+        onClick={criarSala}
+        className="bg-green-500 text-white px-4 py-2 rounded"
+      >
+        Criar Sala
+      </button>
       <form onSubmit={entrarSala} className="space-y-2">
-        <input name="codigo" placeholder="Código da sala" className="p-2 border rounded" />
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Entrar na Sala</button>
+        <input
+          name="codigo"
+          placeholder="Código da sala"
+          className="p-2 border rounded"
+        />
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          Entrar na Sala
+        </button>
       </form>
     </div>
   );
