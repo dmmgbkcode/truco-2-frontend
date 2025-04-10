@@ -7,7 +7,7 @@ const Sala = ({ nome }) => {
 
   useEffect(() => {
     const fetchSala = async () => {
-      const res = await fetch('http://localhost:3001/sala/' + codigo);
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/sala/${codigo}`);
       const data = await res.json();
       setSala(data);
     };
@@ -17,7 +17,9 @@ const Sala = ({ nome }) => {
   }, [codigo]);
 
   const iniciar = async () => {
-    await fetch('http://localhost:3001/iniciar/' + codigo, { method: 'POST' });
+    await fetch(`${import.meta.env.VITE_BACKEND_URL}/iniciar/${codigo}`, {
+      method: 'POST',
+    });
   };
 
   if (!sala) return <div>Carregando sala...</div>;
